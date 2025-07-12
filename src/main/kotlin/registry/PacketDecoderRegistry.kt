@@ -15,7 +15,6 @@ class PacketDecoderRegistry : IRegistry<Int, PacketDecoder<out DataPacket>?, Pac
 
         // Register all packets that are Client -> Server
         register(ProtocolInfo.INVENTORY_TRANSACTION_PACKET, InventoryTransactionPacket)
-        register(ProtocolInfo.INTERACT_PACKET, InteractPacket)
         register(ProtocolInfo.ANIMATE_PACKET, AnimatePacket)
         register(ProtocolInfo.ENTITY_EVENT_PACKET, EntityEventPacket)
         register(ProtocolInfo.LOGIN_PACKET, LoginPacket)
@@ -27,7 +26,6 @@ class PacketDecoderRegistry : IRegistry<Int, PacketDecoder<out DataPacket>?, Pac
         register(ProtocolInfo.PLAYER_ACTION_PACKET, PlayerActionPacket)
         register(ProtocolInfo.PLAYER_SKIN_PACKET, PlayerSkinPacket)
         register(ProtocolInfo.SET_TITLE_PACKET, SetTitlePacket)
-        register(ProtocolInfo.TEXT_PACKET, TextPacket)
         register(ProtocolInfo.MOVE_ENTITY_DELTA_PACKET, MoveEntityDeltaPacket)
         register(ProtocolInfo.LEVEL_SOUND_EVENT_PACKET, LevelSoundEventPacket)
         register(ProtocolInfo.NPC_REQUEST_PACKET, NPCRequestPacket)

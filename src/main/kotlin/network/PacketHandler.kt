@@ -10,8 +10,6 @@ interface PacketHandler {
 
     fun handle(pk: EntityEventPacket) {}
 
-    fun handle(pk: InteractPacket) {}
-
     fun handle(pk: InventoryTransactionPacket) {}
 
     fun handle(pk: LevelEventGenericPacket) {}
@@ -53,8 +51,6 @@ interface PacketHandler {
     fun handle(pk: StartGamePacket) {}
 
     fun handle(pk: StructureBlockUpdatePacket) {}
-
-    fun handle(pk: TextPacket) {}
 
     fun handle(pk: UpdateAttributesPacket) {}
 }

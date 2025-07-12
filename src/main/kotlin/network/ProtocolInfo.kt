@@ -12,7 +12,6 @@ object ProtocolInfo {
         (GAME_VERSION.major shl 24) or (GAME_VERSION.minor shl 16) or (GAME_VERSION.patch shl 8)
 
     const val LOGIN_PACKET = 1
-    const val TEXT_PACKET = 9
     const val START_GAME_PACKET = 11
     const val MOVE_ENTITY_ABSOLUTE_PACKET = 18
     const val MOVE_PLAYER_PACKET = 19
@@ -23,7 +22,6 @@ object ProtocolInfo {
     const val INVENTORY_TRANSACTION_PACKET = 30
     const val MOB_EQUIPMENT_PACKET = 31
     const val MOB_ARMOR_EQUIPMENT_PACKET = 32
-    const val INTERACT_PACKET = 33
     const val PLAYER_ACTION_PACKET = 36
     const val ANIMATE_PACKET = 44
     const val CRAFTING_DATA_PACKET = 52
