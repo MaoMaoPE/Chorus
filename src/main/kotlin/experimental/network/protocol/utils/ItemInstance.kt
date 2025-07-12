@@ -55,7 +55,7 @@ operator fun Item.Companion.invoke(from: ItemInstance): Item {
             from.metadata.toInt(),
             from.count.toInt(),
             Buffer().apply {
-                org.chorus_oss.nbt.Tag.serialize(from.nbtData, this, TagSerialization.LE)
+                org.chorus_oss.nbt.Tag.serialize(from.nbtData, this, TagSerialization.LE, isRoot = true)
             }.readByteArray()
         )
     }
