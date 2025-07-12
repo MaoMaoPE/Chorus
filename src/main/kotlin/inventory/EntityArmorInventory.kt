@@ -4,7 +4,6 @@ import org.chorus_oss.chorus.Player
 import org.chorus_oss.chorus.entity.Entity
 import org.chorus_oss.chorus.experimental.network.protocol.utils.invoke
 import org.chorus_oss.chorus.item.Item
-import org.chorus_oss.chorus.network.protocol.MobArmorEquipmentPacket
 import org.chorus_oss.chorus.network.protocol.types.inventory.FullContainerName
 import org.chorus_oss.protocol.types.item.ItemStack
 
@@ -81,17 +80,15 @@ class EntityArmorInventory(holder: InventoryHolder) : BaseInventory(holder, Inve
             )
             player.sendPacket(packet)
         } else {
-            val mobArmorEquipmentPacket = MobArmorEquipmentPacket()
-            mobArmorEquipmentPacket.eid = entity.getRuntimeID()
-            mobArmorEquipmentPacket.slots = arrayOf(
-                this.helmet,
-                chestplate,
-                leggings,
-                boots
+            val mobArmorEquipmentPacket = org.chorus_oss.protocol.packets.MobArmorEquipmentPacket(
+                entityRuntimeID = entity.getRuntimeID().toULong(),
+                head = ItemStack(helmet),
+                torso = ItemStack(chestplate),
+                legs = ItemStack(leggings),
+                feet = ItemStack(boots),
+                body = ItemStack(body)
             )
-            mobArmorEquipmentPacket.body = this.body
-
-            player.dataPacket(mobArmorEquipmentPacket)
+            player.sendPacket(mobArmorEquipmentPacket)
         }
     }
 
@@ -120,17 +117,15 @@ class EntityArmorInventory(holder: InventoryHolder) : BaseInventory(holder, Inve
             )
             player.sendPacket(packet)
         } else {
-            val mobArmorEquipmentPacket = MobArmorEquipmentPacket()
-            mobArmorEquipmentPacket.eid = entity.getRuntimeID()
-            mobArmorEquipmentPacket.slots = arrayOf(
-                this.helmet,
-                chestplate,
-                leggings,
-                boots
+            val mobArmorEquipmentPacket = org.chorus_oss.protocol.packets.MobArmorEquipmentPacket(
+                entityRuntimeID = entity.getRuntimeID().toULong(),
+                head = ItemStack(helmet),
+                torso = ItemStack(chestplate),
+                legs = ItemStack(leggings),
+                feet = ItemStack(boots),
+                body = ItemStack(body)
             )
-            mobArmorEquipmentPacket.body = this.body
-
-            player.dataPacket(mobArmorEquipmentPacket)
+            player.sendPacket(mobArmorEquipmentPacket)
         }
     }
 

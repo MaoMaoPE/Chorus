@@ -14,7 +14,6 @@ import org.chorus_oss.chorus.item.ItemArmor
 import org.chorus_oss.chorus.item.ItemFilledMap
 import org.chorus_oss.chorus.level.vibration.VibrationEvent
 import org.chorus_oss.chorus.level.vibration.VibrationType
-import org.chorus_oss.chorus.network.protocol.MobArmorEquipmentPacket
 import org.chorus_oss.chorus.network.protocol.MobEquipmentPacket
 import org.chorus_oss.chorus.network.protocol.types.inventory.FullContainerName
 import org.chorus_oss.chorus.network.protocol.types.itemstack.ContainerSlotType
@@ -495,9 +494,14 @@ class HumanInventory(human: IHuman) //9+27+4
     fun sendArmorContents(players: Array<Player>) {
         val armor = this.armorContents
 
-        val pk = MobArmorEquipmentPacket()
-        pk.eid = (holder as IHuman).getEntity().getUniqueID()
-        pk.slots = armor
+        val pk = org.chorus_oss.protocol.packets.MobArmorEquipmentPacket(
+            entityRuntimeID = (holder as IHuman).getEntity().getRuntimeID().toULong(),
+            head = ItemStack(armor[0]),
+            torso = ItemStack(armor[1]),
+            legs = ItemStack(armor[2]),
+            feet = ItemStack(armor[3]),
+            body = ItemStack(Item.AIR),
+        )
 
         for (player in players) {
             if (player == this.holder) {
@@ -552,7 +556,7 @@ class HumanInventory(human: IHuman) //9+27+4
 
                 player.sendPacket(pk2)
             } else {
-                player.dataPacket(pk)
+                player.sendPacket(pk)
             }
         }
     }
@@ -586,9 +590,14 @@ class HumanInventory(human: IHuman) //9+27+4
     fun sendArmorSlot(index: Int, players: Array<Player>) {
         val armor = this.armorContents
 
-        val pk = MobArmorEquipmentPacket()
-        pk.eid = (holder as IHuman).getEntity().getUniqueID()
-        pk.slots = armor
+        val pk = org.chorus_oss.protocol.packets.MobArmorEquipmentPacket(
+            entityRuntimeID = (holder as IHuman).getEntity().getRuntimeID().toULong(),
+            head = ItemStack(armor[0]),
+            torso = ItemStack(armor[1]),
+            legs = ItemStack(armor[2]),
+            feet = ItemStack(armor[3]),
+            body = ItemStack(Item.AIR),
+        )
 
         for (player in players) {
             if (player == this.holder) {
@@ -621,7 +630,7 @@ class HumanInventory(human: IHuman) //9+27+4
                 )
                 player.sendPacket(pk2)
             } else {
-                player.dataPacket(pk)
+                player.sendPacket(pk)
             }
         }
     }

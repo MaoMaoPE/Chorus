@@ -13,10 +13,10 @@ import org.chorus_oss.chorus.level.Sound
 import org.chorus_oss.chorus.nbt.tag.CompoundTag
 import org.chorus_oss.chorus.nbt.tag.ListTag
 import org.chorus_oss.chorus.network.protocol.LevelSoundEventPacket
-import org.chorus_oss.chorus.network.protocol.MobArmorEquipmentPacket
 import org.chorus_oss.chorus.network.protocol.types.itemstack.ContainerSlotType
 import org.chorus_oss.nbt.TagSerialization
 import org.chorus_oss.protocol.types.ContainerType
+import org.chorus_oss.protocol.types.item.ItemStack
 
 class HorseInventory(holder: EntityHorse) : BaseInventory(holder, InventoryType.HORSE, 2) {
     var saddle: Item
@@ -56,11 +56,13 @@ class HorseInventory(holder: EntityHorse) : BaseInventory(holder, InventoryType.
             if (!horseArmor.isNothing) {
                 holder.level!!.addSound(holder.vector3, Sound.MOB_HORSE_ARMOR)
             }
-            val mobArmorEquipmentPacket = MobArmorEquipmentPacket()
-            mobArmorEquipmentPacket.eid = (holder as EntityHorse).getUniqueID()
-            mobArmorEquipmentPacket.slots = arrayOf(
-                Item.AIR,
-                horseArmor, Item.AIR, Item.AIR
+            val mobArmorEquipmentPacket = org.chorus_oss.protocol.packets.MobArmorEquipmentPacket(
+                entityRuntimeID = (holder as EntityHorse).getRuntimeID().toULong(),
+                head = ItemStack(Item.AIR),
+                torso = ItemStack(horseArmor),
+                legs = ItemStack(Item.AIR),
+                feet = ItemStack(Item.AIR),
+                body = ItemStack(Item.AIR),
             )
             Server.broadcastPacket(this.viewers, mobArmorEquipmentPacket)
         }
