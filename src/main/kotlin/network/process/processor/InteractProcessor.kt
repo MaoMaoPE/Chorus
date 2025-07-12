@@ -89,6 +89,7 @@ class InteractProcessor : DataPacketProcessor<MigrationPacket<InteractPacket>>()
         }
     }
 
-    override val packetId: Int = TextPacket.id
+    override val packetId: Int = InteractPacket.id
+
     companion object : Loggable
 }
