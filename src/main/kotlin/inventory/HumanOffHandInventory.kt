@@ -4,7 +4,6 @@ import org.chorus_oss.chorus.Player
 import org.chorus_oss.chorus.entity.IHuman
 import org.chorus_oss.chorus.experimental.network.protocol.utils.invoke
 import org.chorus_oss.chorus.item.Item
-import org.chorus_oss.chorus.network.protocol.MobEquipmentPacket
 import org.chorus_oss.chorus.network.protocol.types.itemstack.ContainerSlotType
 import org.chorus_oss.protocol.packets.InventoryContentPacket
 import org.chorus_oss.protocol.types.inventory.FullContainerName
@@ -63,9 +62,9 @@ class HumanOffHandInventory(holder: IHuman) : BaseInventory(holder, InventoryTyp
                 )
 
                 player.sendPacket(packet)
-                player.dataPacket(pk)
+                player.sendPacket(pk)
             } else {
-                player.dataPacket(pk)
+                player.sendPacket(pk)
             }
         }
     }
@@ -74,12 +73,14 @@ class HumanOffHandInventory(holder: IHuman) : BaseInventory(holder, InventoryTyp
         sendContents(*players)
     }
 
-    private fun createMobEquipmentPacket(item: Item): MobEquipmentPacket {
-        val pk = MobEquipmentPacket()
-        pk.eid = (holder as IHuman).getEntity().getUniqueID()
-        pk.item = item
-        pk.slot = 1
-        pk.containerId = SpecialWindowId.OFFHAND.id
+    private fun createMobEquipmentPacket(item: Item): org.chorus_oss.protocol.packets.MobEquipmentPacket {
+        val pk = org.chorus_oss.protocol.packets.MobEquipmentPacket(
+            entityRuntimeID = (holder as IHuman).getEntity().getRuntimeID().toULong(),
+            newItem = ItemStack(item),
+            inventorySlot = 1,
+            hotbarSlot = 0,
+            windowID = SpecialWindowId.OFFHAND.id.toByte()
+        )
         return pk
     }
 }

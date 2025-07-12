@@ -14,7 +14,6 @@ import org.chorus_oss.chorus.item.ItemArmor
 import org.chorus_oss.chorus.item.ItemFilledMap
 import org.chorus_oss.chorus.level.vibration.VibrationEvent
 import org.chorus_oss.chorus.level.vibration.VibrationType
-import org.chorus_oss.chorus.network.protocol.MobEquipmentPacket
 import org.chorus_oss.chorus.network.protocol.types.inventory.FullContainerName
 import org.chorus_oss.chorus.network.protocol.types.itemstack.ContainerSlotType
 import org.chorus_oss.protocol.packets.PlayerArmorDamagePacket.Companion.FLAG_BOOTS
@@ -157,19 +156,18 @@ class HumanInventory(human: IHuman) //9+27+4
     fun sendHeldItem(vararg players: Player) {
         val item = this.itemInHand
 
-        val pk = MobEquipmentPacket()
-        pk.item = item
-        pk.selectedSlot = this.heldItemIndex
-        pk.slot = pk.selectedSlot
-
+        val pk = org.chorus_oss.protocol.packets.MobEquipmentPacket(
+            entityRuntimeID = (holder as IHuman).getEntity().getRuntimeID().toULong(),
+            newItem = ItemStack(item),
+            inventorySlot = heldItemIndex.toByte(),
+            hotbarSlot = heldItemIndex.toByte(),
+            windowID = 0
+        )
         for (player in players) {
-            pk.eid = (holder as IHuman).getEntity().getUniqueID()
             if (player == this.holder) {
-                pk.eid = player.getRuntimeID()
                 this.sendSlot(this.heldItemIndex, player)
             }
-
-            player.dataPacket(pk)
+            player.sendPacket(pk)
         }
     }
 

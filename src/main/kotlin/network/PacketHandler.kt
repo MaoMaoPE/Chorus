@@ -22,8 +22,6 @@ interface PacketHandler {
 
     fun handle(pk: MobEffectPacket) {}
 
-    fun handle(pk: MobEquipmentPacket) {}
-
     fun handle(pk: ModalFormResponsePacket) {}
 
     fun handle(pk: MoveEntityAbsolutePacket) {}
