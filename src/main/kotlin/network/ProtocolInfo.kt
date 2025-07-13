@@ -27,7 +27,6 @@ object ProtocolInfo {
     const val SET_TITLE_PACKET = 88
     const val STRUCTURE_BLOCK_UPDATE_PACKET = 90
     const val PLAYER_SKIN_PACKET = 93
-    const val NPC_REQUEST_PACKET = 98
     const val MODAL_FORM_RESPONSE_PACKET = 101
     const val SET_SCORE_PACKET = 108
     const val MOVE_ENTITY_DELTA_PACKET = 111
