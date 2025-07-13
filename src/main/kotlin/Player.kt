@@ -805,10 +805,14 @@ open class Player(
 
         level!!.sendChunks(this)
 
-        val playerActionPacket = PlayerActionPacket()
-        playerActionPacket.action = PlayerActionPacket.ACTION_DIMENSION_CHANGE_ACK
-        playerActionPacket.entityId = this.getRuntimeID()
-        this.dataPacket(playerActionPacket)
+        val playerActionPacket = org.chorus_oss.protocol.packets.PlayerActionPacket(
+            entityRuntimeID = this.getRuntimeID().toULong(),
+            actionType = PlayerActionType.ChangeDimensionACK,
+            blockPosition = BlockPos(0, 0, 0),
+            resultPosition = BlockPos(0, 0, 0),
+            blockFace = 0,
+        )
+        this.sendPacket(playerActionPacket)
     }
 
     private fun updateBlockingFlag() {

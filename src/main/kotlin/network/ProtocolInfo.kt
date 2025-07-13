@@ -20,7 +20,6 @@ object ProtocolInfo {
     const val MOB_EFFECT_PACKET = 28
     const val UPDATE_ATTRIBUTES_PACKET = 29
     const val INVENTORY_TRANSACTION_PACKET = 30
-    const val PLAYER_ACTION_PACKET = 36
     const val ANIMATE_PACKET = 44
     const val CRAFTING_DATA_PACKET = 52
     const val PLAYER_LIST_PACKET = 63

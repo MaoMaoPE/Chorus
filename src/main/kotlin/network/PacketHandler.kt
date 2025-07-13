@@ -32,8 +32,6 @@ interface PacketHandler {
 
     fun handle(pk: NPCRequestPacket) {}
 
-    fun handle(pk: PlayerActionPacket) {}
-
     fun handle(pk: PlayerEnchantOptionsPacket) {}
 
     fun handle(pk: PlayerListPacket) {}
