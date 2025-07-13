@@ -51,7 +51,7 @@ class NPCRequestProcessor : DataPacketProcessor<MigrationPacket<NPCRequestPacket
             //close dialog after clicked button (otherwise the client will not be able to close the window)
             if (response.clickedButton != null && packet.requestType == NPCRequestPacket.Companion.RequestType.ExecuteAction) {
                 val closeWindowPacket = org.chorus_oss.protocol.packets.NPCDialoguePacket(
-                    entityUniqueID = entity!!.getUniqueID(),
+                    entityUniqueID = entity!!.getUniqueID().toULong(),
                     actionType = org.chorus_oss.protocol.packets.NPCDialoguePacket.Companion.ActionType.Close,
                     dialogue = "",
                     sceneName = response.sceneName,

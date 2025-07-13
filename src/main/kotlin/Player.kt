@@ -4671,7 +4671,7 @@ open class Player(
         dialog.bindEntity!!.setDataProperty(EntityDataTypes.INTERACT_TEXT, dialog.content!!)
 
         val packet = org.chorus_oss.protocol.packets.NPCDialoguePacket(
-            entityUniqueID = dialog.entityUniqueID,
+            entityUniqueID = dialog.entityUniqueID.toULong(),
             actionType = org.chorus_oss.protocol.packets.NPCDialoguePacket.Companion.ActionType.Open,
             dialogue = dialog.content ?: "",
             sceneName = when (book) {
