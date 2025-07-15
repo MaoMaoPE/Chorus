@@ -31,7 +31,7 @@ import java.util.*
 object Chorus : Loggable {
     val GIT_INFO: Properties? = gitInfo
     val VERSION: String = version
-    val CODENAME: String = dynamic("Chorus")
+    val CODENAME: String = dynamic("彩虹(Nyan)猫(Cat)")
     val GIT_COMMIT: String = gitCommit
     val API_VERSION: String = dynamic("0.0.1")
     val PATH: String = System.getProperty("user.dir") + "/"
